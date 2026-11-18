@@ -1,0 +1,28 @@
+/* V6.1: show booking date popovers ABOVE the search bar.
+   The hero has overflow:hidden; a downward popover clipped late-November rows. */
+.search-wrap .calendar-popover,
+.search-wrap .guests-popover {
+  top: auto;
+  bottom: calc(100% + 14px);
+  max-height: min(470px, calc(100svh - 110px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  box-shadow: 0 22px 65px rgba(42,29,31,.24);
+}
+.search-wrap .calendar-popover { left: 20%; }
+.cal-grid button { min-height: 40px; height: 42px; touch-action: manipulation; }
+.cal-grid button:not(:disabled) { color: #281e21; font-weight: 650; }
+.cal-grid button.is-today:not(.selected) { box-shadow: inset 0 0 0 1.5px #b5784f; }
+.cal-grid button:disabled { color: #a99894; background: transparent; text-decoration: line-through; text-decoration-color: #c9bcb4; opacity: .65; }
+.cal-grid button.selected { color: white; }
+.cal-grid button:focus-visible { outline: 2px solid #b5784f; outline-offset: 0; }
+.cal-head button:not(:disabled) { color: #251e20; }
+.popover-note { font-size: 12px; }
+@media (max-width: 640px) {
+  .search-wrap .popover { top: auto !important; bottom: calc(100% + 12px) !important; left: 1% !important; right: auto !important; width: 98% !important; }
+  .search-wrap .calendar-popover,
+  .search-wrap .guests-popover { max-height: min(448px, calc(100svh - 112px)); padding: 14px; }
+  .cal-grid button { min-height: 40px; height: 42px; }
+  .cal-head { margin-bottom: 10px; }
+}

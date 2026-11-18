@@ -102,13 +102,72 @@ if(window.matchMedia('(pointer:fine)').matches&&!prefersReduced.matches){
 }
 /* Functional date-range picker, Monday-first and guest counters. */
 const calendar=$('#calendar-popover'),guestsPopover=$('#guests-popover');
+function fitBookingPopover(panel){
+  // Keep the entire popover below the mobile header, even on short screens.
+  // The available vertical space depends on the hero/search layout and scroll.
+  const searchTop=$('#search-wrap').getBoundingClientRect().top;
+  const safeTop=window.innerWidth<=640?104:92;
+  const available=Math.max(210,Math.floor(searchTop-safeTop-14));
+  panel.style.maxHeight=Math.min(470,available)+'px';
+}
+window.addEventListener('resize',()=>{
+  if(!calendar.hidden)fitBookingPopover(calendar);
+  if(!guestsPopover.hidden)fitBookingPopover(guestsPopover);
+},{passive:true});
 function closePopovers(){calendar.hidden=true;guestsPopover.hidden=true;$('#checkin-trigger').setAttribute('aria-expanded','false');$('#checkout-trigger').setAttribute('aria-expanded','false');$('#guests-trigger').setAttribute('aria-expanded','false')}
-function openCalendar(stage){const wasOpen=!calendar.hidden;closePopovers();state.stage=stage||((!state.start||state.end)?'start':'end');calendar.hidden=false;$('#checkin-trigger').setAttribute('aria-expanded','true');$('#checkout-trigger').setAttribute('aria-expanded','true');if(state.stage==='end'&&!state.start)state.stage='start';if(!wasOpen)renderCalendar()}
-function openGuests(){closePopovers();guestsPopover.hidden=false;$('#guests-trigger').setAttribute('aria-expanded','true')}
-$('#checkin-trigger').addEventListener('click',()=>calendar.hidden?openCalendar('start'):closePopovers());$('#checkout-trigger').addEventListener('click',()=>calendar.hidden?openCalendar(state.start?'end':'start'):closePopovers());$('#guests-trigger').addEventListener('click',()=>guestsPopover.hidden?openGuests():closePopovers());
+function openCalendar(stage){
+  closePopovers();
+  state.stage=(stage==='end'&&state.start)?'end':'start';
+  // Never reopen on a month with no valid dates for the requested stage.
+  const earliest=state.stage==='end' ? dayAfter(state.start) : today();
+  const monthFloor=new Date(earliest.getFullYear(),earliest.getMonth(),1);
+  if(state.month<monthFloor)state.month=monthFloor;
+  calendar.hidden=false;
+  fitBookingPopover(calendar);
+  $('#checkin-trigger').setAttribute('aria-expanded',String(state.stage==='start'));
+  $('#checkout-trigger').setAttribute('aria-expanded',String(state.stage==='end'));
+  renderCalendar();
+}
+function openGuests(){closePopovers();guestsPopover.hidden=false;fitBookingPopover(guestsPopover);$('#guests-trigger').setAttribute('aria-expanded','true')}
+$('#checkin-trigger').addEventListener('click',()=>{if(!calendar.hidden&&state.stage==='start')closePopovers();else openCalendar('start')});
+$('#checkout-trigger').addEventListener('click',()=>{const next=state.start?'end':'start';if(!calendar.hidden&&state.stage===next)closePopovers();else openCalendar(next)});
+$('#guests-trigger').addEventListener('click',()=>guestsPopover.hidden?openGuests():closePopovers());
 function updateDateLabels(){$('#checkin-label').textContent=shortDate(state.start);$('#checkout-label').textContent=shortDate(state.end)}
-function renderCalendar(){const y=state.month.getFullYear(),m=state.month.getMonth();$('#cal-month').textContent=state.month.toLocaleDateString('en-IN',{month:'long',year:'numeric'});$('#cal-prev').disabled=new Date(y,m,1)<=new Date(today().getFullYear(),today().getMonth(),1);const grid=$('#cal-grid');grid.textContent='';const startOffset=(new Date(y,m,1).getDay()+6)%7;for(let i=0;i<startOffset;i++){grid.append(document.createElement('span'))}const n=new Date(y,m+1,0).getDate();for(let d=1;d<=n;d++){const dt=new Date(y,m,d),btn=document.createElement('button');btn.type='button';btn.textContent=String(d);btn.disabled=dt<today()||(state.stage==='end'&&state.start&&dt<=state.start);const selected=Boolean((state.start&&dateStr(state.start)===dateStr(dt))||(state.end&&dateStr(state.end)===dateStr(dt)));const inRange=state.start&&state.end&&dt>state.start&&dt<state.end;btn.classList.toggle('selected',selected);btn.classList.toggle('in-range',Boolean(inRange));btn.setAttribute('aria-label',dt.toDateString());btn.setAttribute('aria-pressed',String(selected));btn.addEventListener('click',()=>selectDate(dt));grid.append(btn)}$('#cal-hint').textContent=state.stage==='start'?'Select your arrival date.':'Select a departure date after check-in.'}
-function selectDate(dt){if(state.stage==='start'||!state.start){state.start=dt;state.end=null;state.stage='end'}else{state.end=dt;state.stage='start';closePopovers();setTimeout(openGuests,180)}updateDateLabels();renderCalendar()}
+function renderCalendar(){
+ const y=state.month.getFullYear(),m=state.month.getMonth();
+ const firstValid=state.stage==='end'&&state.start?dayAfter(state.start):today();
+ $('#cal-month').textContent=state.month.toLocaleDateString('en-IN',{month:'long',year:'numeric'});
+ $('#cal-prev').disabled=new Date(y,m,1)<=new Date(firstValid.getFullYear(),firstValid.getMonth(),1);
+ const grid=$('#cal-grid');grid.textContent='';
+ const startOffset=(new Date(y,m,1).getDay()+6)%7;
+ for(let i=0;i<startOffset;i++)grid.append(document.createElement('span'));
+ const n=new Date(y,m+1,0).getDate();
+ for(let d=1;d<=n;d++){
+  const dt=new Date(y,m,d),btn=document.createElement('button');btn.type='button';btn.textContent=String(d);
+  btn.disabled=dt<firstValid;
+  const selected=Boolean((state.start&&dateStr(state.start)===dateStr(dt))||(state.end&&dateStr(state.end)===dateStr(dt)));
+  const inRange=state.start&&state.end&&dt>state.start&&dt<state.end;
+  btn.classList.toggle('selected',selected);btn.classList.toggle('in-range',Boolean(inRange));
+  btn.classList.toggle('is-today',dateStr(dt)===dateStr(today()));
+  btn.setAttribute('aria-label',`${dt.toDateString()}${btn.disabled?' — unavailable':''}`);
+  btn.setAttribute('aria-pressed',String(selected));
+  if(!btn.disabled)btn.addEventListener('click',()=>selectDate(dt));
+  grid.append(btn)
+ }
+ $('#cal-hint').textContent=state.stage==='start'
+ ?`Choose check-in. Dates before ${shortDate(today())} are unavailable.`
+ :`Check-in: ${shortDate(state.start)}. Choose check-out from ${shortDate(firstValid)} onward.`;
+}
+function selectDate(dt){
+ const earliest=state.stage==='end'&&state.start?dayAfter(state.start):today();
+ if(dt<earliest)return;
+ if(state.stage==='start'||!state.start){
+  state.start=dt;state.end=null;state.stage='end';
+ }else{
+  state.end=dt;state.stage='start';closePopovers();setTimeout(openGuests,180);
+ }
+ updateDateLabels();renderCalendar();
+}
 $('#cal-prev').addEventListener('click',()=>{state.month=new Date(state.month.getFullYear(),state.month.getMonth()-1,1);renderCalendar()});$('#cal-next').addEventListener('click',()=>{state.month=new Date(state.month.getFullYear(),state.month.getMonth()+1,1);renderCalendar()});
 function updateGuests(){$('#adults-count').textContent=state.adults;$('#children-count').textContent=state.children;$('#guests-label').textContent=state.children?`${state.adults+state.children} guests`:`${state.adults} adult${state.adults===1?'':'s'}`}
 $$('[data-step]').forEach(b=>b.addEventListener('click',()=>{const [k,delta]=b.dataset.step.split(':');const target=state[k]+Number(delta);state[k]=Math.max(k==='adults'?1:0,Math.min(12,target));updateGuests()}));$('#guests-done').addEventListener('click',closePopovers);

@@ -29,3 +29,11 @@ A lightweight HTML/CSS/vanilla-JavaScript website with **local** bundled photogr
 ## What must be verified after deployment
 
 Check `index.html`, all cottage links, gallery lightbox, contact form, real-device PWA installation, browser back/forward, reduced motion, image loading on slow 4G, and Lighthouse metrics. Static tests do not guarantee field performance.
+
+
+## V6.1 — Calendar fix
+
+- The calendar and guest pickers now open **above** the hero booking bar. The old below-the-bar positioning was clipped by the full-bleed hero, hiding late-November dates.
+- November dates on/after the visitor's local current day are selectable. Past dates remain disabled for valid reservations.
+- Improved mobile touch targets, disabled-date indicators and stage-specific hint text.
+- The service-worker cache version was updated so already-installed PWA copies receive the fix.

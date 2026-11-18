@@ -1,5 +1,5 @@
 /* Mirchoni V4. Offline shell + bounded runtime photo cache. No booking data or PII cached. */
-const CACHE_VERSION='v6-2026-11-18-photos';
+const CACHE_VERSION='v6-1-2026-11-18-calendar-fixed';
 const SHELL='mirchoni-shell-'+CACHE_VERSION;
 const PAGES='mirchoni-pages-'+CACHE_VERSION;
 const PHOTOS='mirchoni-photos-'+CACHE_VERSION;
@@ -14,6 +14,7 @@ const CORE=[
  "./assets/css/pwa.css",
  "./assets/css/polish.css",
  "./assets/css/v6.css",
+ "./assets/css/calendar-fix.css",
  "./assets/js/cinematic.js",
  "./assets/js/pwa.js",
  "./assets/js/image-manager.js",
