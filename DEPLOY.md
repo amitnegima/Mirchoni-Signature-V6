@@ -1,0 +1,1 @@
+Deploy via https://vercel.com/drop with index.html at the upload root. Framework: Other; no build command or output directory. If updating an existing Vercel project, upload as a new deployment and hard-refresh the service-worker cache. The V6 release includes all images locally.

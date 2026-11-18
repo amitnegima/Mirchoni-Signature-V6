@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+# Replace the live-domain URL below after deployment.

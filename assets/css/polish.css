@@ -1,0 +1,51 @@
+/* Mirchoni V5 · dependable imagery, native cursor, restrained luxe motion */
+:root{--forest:#233d35;--amber:#e7ad73;--night:#151f1b}
+html,body,body a,body button,body input,body select,body textarea,[role="button"]{cursor:auto!important}
+a,button,[role="button"]{cursor:pointer!important}
+input,textarea{cursor:text!important}
+#pointer{display:none!important}
+@media(pointer:fine) and (prefers-reduced-motion:no-preference){
+ #pointer{display:block!important;position:fixed;z-index:9999;left:0;top:0;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,237,198,.55);background:rgba(247,214,168,.09);box-shadow:0 0 22px rgba(245,218,178,.13);pointer-events:none;opacity:0;transform:translate3d(-70px,-70px,0) translate(-50%,-50%);transition:width .2s ease,height .2s ease,opacity .15s ease,background .18s ease;will-change:transform}
+ #pointer.active{opacity:.8}#pointer.hover{width:58px;height:58px;background:rgba(255,236,198,.15)}
+}
+/* Photo layers occupy the existing image box and never steal clicks. */
+img.photo-official-layer{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;opacity:0;pointer-events:none!important;z-index:1;transition:opacity .85s cubic-bezier(.16,1,.3,1);border-radius:inherit;filter:contrast(1.02) saturate(.96)}
+img.photo-official-layer.is-ready{opacity:1}
+.slide-visual>img.photo-official-layer{z-index:1}
+.slide-visual>.slide-photo,.story-photo>img,.panorama>img{width:100%;height:100%;object-fit:cover}
+.slide-visual{isolation:isolate}
+/* Concept photograph never shows as broken or unpainted pixels. */
+.slide-visual,.story-photo,.panorama,.stay-card,.experience-card,.gallery-grid button,.detail-image-main,.detail-photo-thumb{background-color:#678079;overflow:hidden}
+.slide-photo,.stay-card>img,.experience-card>img,.story-photo>img,.panorama>img,.gallery-grid img{filter:saturate(.96) contrast(1.025)}
+.slide-visual img{object-position:center!important}
+.slide[data-slide="0"] .slide-photo{object-position:center 52%!important}
+.slide[data-slide="1"] .slide-photo{object-position:62% 52%!important}
+.slide[data-slide="2"] .slide-photo{object-position:32% 48%!important}
+/* Artwork transparency notice; automatically fades when a verified official photograph is layered. */
+.scene-disclosure{position:absolute;left:clamp(18px,6vw,96px);bottom:clamp(105px,14vh,165px);font:650 8px/1.4 Urbanist,Arial,sans-serif;letter-spacing:.16em;color:#fdf4e9;background:rgba(27,31,29,.25);backdrop-filter:blur(7px);padding:8px 10px;border:1px solid rgba(255,255,255,.18);border-radius:30px;z-index:9;pointer-events:none}
+.hero:has(.slide.is-current .photo-official-layer.is-ready) .scene-disclosure{opacity:0}
+/* Make visual movement elegant, lightweight and smooth. */
+.stay-card{transition:transform .48s cubic-bezier(.16,1,.3,1),box-shadow .48s ease;box-shadow:0 14px 38px rgba(62,37,32,.14)}
+@media(hover:hover) and (pointer:fine){
+ .stay-card:hover{transform:translateY(-8px);box-shadow:0 27px 58px rgba(62,37,32,.22)}
+ .stay-card:hover>img,.stay-card:hover>.photo-official-layer,.experience-card:hover>img,.gallery-grid button:hover>img{transform:scale(1.045)}
+}
+.stay-card>img,.stay-card>.photo-official-layer,.experience-card>img,.gallery-grid button>img{transition:transform .95s cubic-bezier(.16,1,.3,1),filter .6s ease}
+/* Subtle premium details */
+.header.solid{box-shadow:0 8px 28px rgba(51,35,28,.05)}
+.search-bar{box-shadow:0 18px 55px rgba(45,34,32,.22),0 2px 10px rgba(255,255,255,.22) inset;border:1px solid rgba(255,255,255,.42)}
+.header-cta,.search-submit,.book-button,.contact-button{transition:transform .24s cubic-bezier(.16,1,.3,1),box-shadow .24s ease,background-color .24s ease}
+.header-cta:hover,.search-submit:hover,.contact-button:hover{transform:translateY(-2px);box-shadow:0 9px 24px rgba(24,30,24,.16)}
+.section-head h2,.story-copy h2,.contact-copy h2{letter-spacing:-.035em}
+@media(max-width:640px){
+ .scene-disclosure{bottom:clamp(90px,12vh,130px);left:18px;font-size:7px;letter-spacing:.075em;max-width:235px;white-space:normal}
+ .stay-card{box-shadow:0 9px 22px rgba(62,37,32,.13)}
+ .stay-card:hover{transform:none}
+ .header-cta:hover,.search-submit:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){img.photo-official-layer,.stay-card,.stay-card>img{transition:none!important}#pointer{display:none!important}}
+
+.stay-card>.stay-price,.stay-card>.stay-heart,.stay-card>.stay-description,.experience-card>.experience-text,.panorama>.panorama-overlay,.story-photo>.story-photo-note{z-index:3;position:absolute}
+.stay-card .stay-description{pointer-events:none}
+.gallery-grid button,.detail-photo-thumb,.rail-thumb{position:relative}
+.gallery-grid button>.photo-official-layer,.detail-photo-thumb>.photo-official-layer,.rail-thumb>.photo-official-layer{border-radius:inherit}

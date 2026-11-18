@@ -1,0 +1,40 @@
+/* Mirchoni V6: photographic editorial finish and reliable rendering */
+:root{--v6-forest:#243f33;--v6-gold:#e9b477;--v6-peach:#f7dac8}
+html{scroll-behavior:smooth}
+body{font-synthesis:none}
+.slide-photo,.rail-thumb img,.story-photo img,.panorama img,.stay-card>img,.experience-card>img{object-fit:cover;backface-visibility:hidden}
+.slide-visual{background:#213f36;isolation:isolate}
+.slide[data-slide='0'] .slide-photo{object-position:center 57%!important}
+.slide[data-slide='1'] .slide-photo{object-position:center 60%!important}
+.slide[data-slide='2'] .slide-photo{object-position:center 54%!important}
+/* First frame stays visible before JS; no transparent starting state */
+.slide.is-current .slide-photo{opacity:1}
+.scene-disclosure{background:rgba(16,30,25,.42)!important;border-color:rgba(255,255,255,.22)!important;opacity:1!important;z-index:11!important}
+.hero .slide.is-current:has(img.photo-official-layer.is-ready)~.scene-disclosure{opacity:1}
+.gallery-grid button{position:relative}
+.gallery-grid .v6-image-chip{position:absolute;bottom:9px;left:9px;z-index:4;background:rgba(21,29,26,.72);color:#fff;border:1px solid rgba(255,255,255,.25);padding:6px 9px;border-radius:16px;font:700 10px Urbanist,Arial,sans-serif;letter-spacing:.02em;pointer-events:none}
+.visual-integrity-notice{background:#253f34;color:#f1e7d8;text-align:center;font:500 12px/1.55 Urbanist,Arial,sans-serif;padding:17px 20px;letter-spacing:.025em}
+.v6-editorial{background:#fff9f3;padding:clamp(62px,8vw,110px) clamp(22px,9.5vw,170px);overflow:hidden}
+.v6-editorial-heading{max-width:900px;margin-bottom:32px}
+.v6-editorial h2{font:clamp(42px,5.1vw,78px)/1.05 'Gilda Display',Georgia,serif;letter-spacing:-.035em;color:#292520;margin:13px 0}
+.v6-editorial h2 em{color:#9b755d}
+.v6-editorial-heading p{font:500 14px/1.6 Urbanist,Arial,sans-serif;color:#75615a;max-width:590px}
+.v6-editorial-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:20px}
+.v6-editorial figure{height:clamp(310px,38vw,560px);margin:0;position:relative;overflow:hidden;border-radius:18px;background:#486558;box-shadow:0 18px 50px rgba(27,26,21,.14)}
+.v6-editorial figure:nth-child(2){margin-top:58px}
+.v6-editorial figure:after{content:'';position:absolute;inset:42% 0 0;background:linear-gradient(transparent,rgba(15,24,20,.76));pointer-events:none}
+.v6-editorial figure img{width:100%;height:100%;object-fit:cover;transition:transform 1.35s cubic-bezier(.16,1,.3,1),filter .7s;will-change:auto}
+.v6-editorial figure:hover img{transform:scale(1.035)}
+.v6-editorial figcaption{position:absolute;z-index:2;left:clamp(20px,3vw,45px);bottom:clamp(22px,3vw,45px);color:#fff}
+.v6-editorial figcaption span{font:800 11px Urbanist,Arial,sans-serif;letter-spacing:.18em;color:#eec5a7;display:block;margin-bottom:8px}
+.v6-editorial figcaption strong{font:clamp(28px,3.2vw,49px)/1.1 'Gilda Display',Georgia,serif;font-weight:400}
+.v6-editorial-link{display:inline-flex;gap:24px;margin-top:27px;padding:14px 24px;border:1px solid #94735d;border-radius:50px;color:#3f3d32;font-size:13px;font-weight:800}
+.v6-editorial-link:hover{background:#253f34;color:#fff}
+/* The pointer remains the operating system's cursor. The halo is decoration only. */
+html,body,body a,body button,body input,body select,body textarea,[role='button']{cursor:auto!important}
+a,button,[role='button']{cursor:pointer!important}
+input,textarea{cursor:text!important}
+@media(max-width:700px){.v6-editorial{padding:65px 18px}.v6-editorial-grid{grid-template-columns:1fr;gap:14px}.v6-editorial figure{height:335px;border-radius:13px}.v6-editorial figure:nth-child(2){margin-top:0}.v6-editorial figcaption strong{font-size:30px}.visual-integrity-notice{font-size:11px}.scene-disclosure{max-width:195px}}
+@media(prefers-reduced-motion:reduce){.v6-editorial figure img{transition:none!important}.v6-editorial figure:hover img{transform:none}}
+
+.slide[data-slide="0"] .slide-visual{background:#253d33 url("../img/ai/sunset-gardens-mobile.webp") center/cover no-repeat}

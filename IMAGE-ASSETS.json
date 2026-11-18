@@ -1,0 +1,103 @@
+{
+  "version": "6",
+  "images": [
+    {
+      "name": "sunset-gardens",
+      "src": "assets/img/ai/sunset-gardens.webp",
+      "mobile": "assets/img/ai/sunset-gardens-mobile.webp",
+      "type": "AI-enhanced editorial visual",
+      "original_source": "golden_hour_mirchoni_resort_retreat.png"
+    },
+    {
+      "name": "golden-reception",
+      "src": "assets/img/ai/golden-reception.webp",
+      "mobile": "assets/img/ai/golden-reception-mobile.webp",
+      "type": "AI-enhanced editorial visual",
+      "original_source": "golden_hour_mountain_resort_reception.png"
+    },
+    {
+      "name": "heritage-facade",
+      "src": "assets/img/ai/heritage-facade.webp",
+      "mobile": "assets/img/ai/heritage-facade-mobile.webp",
+      "type": "AI-enhanced editorial visual",
+      "original_source": "mirchoni_lodge_in_the_forest.png"
+    },
+    {
+      "name": "moonlit-cottages",
+      "src": "assets/img/ai/moonlit-cottages.webp",
+      "mobile": "assets/img/ai/moonlit-cottages-mobile.webp",
+      "type": "AI-enhanced editorial visual",
+      "original_source": "mirchoni_resort_under_the_stars.png"
+    },
+    {
+      "name": "moonlit-reception",
+      "src": "assets/img/ai/moonlit-reception.webp",
+      "mobile": "assets/img/ai/moonlit-reception-mobile.webp",
+      "type": "AI-enhanced editorial visual",
+      "original_source": "moonlit_reception_cottage_retreat.png"
+    },
+    {
+      "name": "rain-lit-path",
+      "src": "assets/img/ai/rain-lit-path.webp",
+      "mobile": "assets/img/ai/rain-lit-path-mobile.webp",
+      "type": "AI-enhanced editorial visual",
+      "original_source": "rain_glossed_mirchoni_resort_nights.png"
+    },
+    {
+      "name": "premium-suite",
+      "src": "assets/img/ai/premium-suite.webp",
+      "mobile": "assets/img/ai/premium-suite-mobile.webp",
+      "type": "AI-enhanced editorial visual",
+      "original_source": "luxury_mirchoni_resort_bedroom.png"
+    },
+    {
+      "name": "garden-day",
+      "src": "assets/img/real/garden-day.webp",
+      "mobile": "assets/img/real/garden-day-mobile.webp",
+      "type": "Original user-supplied photo",
+      "original_source": "1.png"
+    },
+    {
+      "name": "night-cottages",
+      "src": "assets/img/real/night-cottages.webp",
+      "mobile": "assets/img/real/night-cottages-mobile.webp",
+      "type": "Original user-supplied photo",
+      "original_source": "3.png"
+    },
+    {
+      "name": "reception-night",
+      "src": "assets/img/real/reception-night.webp",
+      "mobile": "assets/img/real/reception-night-mobile.webp",
+      "type": "Original user-supplied photo",
+      "original_source": "Artboard-1-min.jpg"
+    },
+    {
+      "name": "exterior-day",
+      "src": "assets/img/real/exterior-day.webp",
+      "mobile": "assets/img/real/exterior-day-mobile.webp",
+      "type": "Original user-supplied photo",
+      "original_source": "Outside-1-min.jpg"
+    },
+    {
+      "name": "estate-hills",
+      "src": "assets/img/real/estate-hills.webp",
+      "mobile": "assets/img/real/estate-hills-mobile.webp",
+      "type": "Original user-supplied photo",
+      "original_source": "Outside-5-min(1).jpg"
+    },
+    {
+      "name": "night-walkway",
+      "src": "assets/img/real/night-walkway.webp",
+      "mobile": "assets/img/real/night-walkway-mobile.webp",
+      "type": "Original user-supplied photo",
+      "original_source": "Outside-8-min.jpg"
+    },
+    {
+      "name": "premium-room",
+      "src": "assets/img/real/premium-room.webp",
+      "mobile": "assets/img/real/premium-room-mobile.webp",
+      "type": "Original user-supplied photo",
+      "original_source": "Premium-Cottage-2.jpg"
+    }
+  ]
+}

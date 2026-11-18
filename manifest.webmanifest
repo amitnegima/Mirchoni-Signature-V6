@@ -1,0 +1,55 @@
+{
+  "id": "./",
+  "name": "Mirchoni Resorts \u00b7 Heritage Nainital",
+  "short_name": "Mirchoni",
+  "description": "Explore heritage cottages, nature experiences and plan your stay at Mirchoni Resorts in Nainital.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7d9c6",
+  "theme_color": "#2c4339",
+  "orientation": "any",
+  "lang": "en-IN",
+  "categories": [
+    "travel",
+    "lifestyle"
+  ],
+  "icons": [
+    {
+      "src": "assets/img/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/app-icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Explore cottages",
+      "short_name": "Cottages",
+      "url": "./index.html#stays",
+      "icons": [
+        {
+          "src": "assets/img/app-icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Contact the resort",
+      "short_name": "Contact",
+      "url": "./index.html#contact"
+    }
+  ]
+}
